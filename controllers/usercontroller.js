@@ -2,7 +2,6 @@ const con = require('../config/db')
 
 module.exports.getAllUsers = (req,res)=>{
     const sql = `select * from users `;
-
     con.execute(sql ,(err, result)=>{
         if(err){
             return res.json({
@@ -14,13 +13,10 @@ module.exports.getAllUsers = (req,res)=>{
                 message:"success !",
                 result
             })        
-
-    })
-   
+    }) 
 }
 
 module.exports.usersWithAddress = (req,res)=>{
-
     const sql = `SELECT USERS.USER_ID ,USERS.FIRST_NAME , USERS.LAST_NAME , USERS.EMAIL , USERS.MOBILE_NO , USERS.DATE_OF_REGISTRATION ,
     USERS.USER_STATUS , USERS.GENDER , ADDRESS.ID , ADDRESS.HOUSE_NO , ADDRESS.LOCAL_ADDRESS , ADDRESS.DISTRICT , ADDRESS.STATE ,ADDRESS.COUNTRY ,
      ADDRESS.PINCODE , ADDRESS.CREATED_AT FROM USERS INNER JOIN ADDRESS ON USERS.USER_ID = ADDRESS.USER_ID`;
@@ -36,9 +32,7 @@ module.exports.usersWithAddress = (req,res)=>{
                 message:"success !",
                 result
             })        
-
     })
-   
 }
 
 module.exports.usersWithHobby = (req,res)=>{
@@ -52,16 +46,41 @@ const sql = `SELECT USERS.USER_ID , USERS.FIRST_NAME , USERS.LAST_NAME , USERS.E
                err:err.sqlMessage
            })
        }
+       let arr=[]
+       result.map(x=>{
+           let userDetail={
+               user_id: x.USER_ID,
+               first_name:x.FIRST_NAME,
+               last_name:x.LAST_NAME,
+               email:x.EMAIL,
+               mobile_no:x.MOBILE_NO,
+               date_of_registration:x.DATE_OF_REGISTRATION,
+               user_status:x.USER_STATUS,
+               gender:x.GENDER,
+               hobbies:[]
+               }     
+       result.map(y=>{
+           if(userDetail.user_id===y.USER_ID){
+            if(!userDetail.hobbies.includes(y.HOBBY)){
+                userDetail.hobbies.push(y.HOBBY);
+            }
+           }
+        })
+        arr.push(userDetail);   
+      })
+   let response = Array.from(new Set(arr.map(a => a.user_id))).map(user_id => {
+                   return arr.find(a => a.user_id === user_id)
+       })
        return res.json({
            message:"Success !",
-           result
+           response
        })
    })
 }
 
 module.exports.usersWithActivity = (req,res)=>{
     const sql = `SELECT USERS.USER_ID , USERS.FIRST_NAME , USERS.LAST_NAME , USERS.EMAIL , USERS.MOBILE_NO , USERS.DATE_OF_REGISTRATION ,
-    USERS.USER_STATUS , USERS.GENDER , ACTIVITIES.ID , ACTIVITIES.ACTIVITY FROM USERS INNER JOIN ACTIVITIES ON USERS.USER_ID = ACTIVITIES.USER_ID`;
+    USERS.USER_STATUS , USERS.GENDER , ACTIVITIES.ID , ACTIVITIES.ACTIVITY FROM USERS left JOIN ACTIVITIES ON USERS.USER_ID = ACTIVITIES.USER_ID`;
     
        con.execute(sql , (err , result)=>{
            if(err){
@@ -70,9 +89,35 @@ module.exports.usersWithActivity = (req,res)=>{
                    err:err.sqlMessage
                })
            }
+           let arr=[]
+            result.map(x=>{
+                let userDetail={
+                    user_id: x.USER_ID,
+                    first_name:x.FIRST_NAME,
+                    last_name:x.LAST_NAME,
+                    email:x.EMAIL,
+                    mobile_no:x.MOBILE_NO,
+                    date_of_registration:x.DATE_OF_REGISTRATION,
+                    user_status:x.USER_STATUS,
+                    gender:x.GENDER,
+                    activities:[]
+                    }     
+            result.map(y=>{
+                if(userDetail.user_id===y.USER_ID){
+                     userDetail.activities.push(y.ACTIVITY);
+                }
+         })
+         arr.push(userDetail);  
+        
+    })
+        let response = Array.from(new Set(arr.map(a => a.user_id))).map(user_id => {
+                        return arr.find(a => a.user_id === user_id)
+            })
+            console.log(response)
+
            return res.json({
                message:"Success !",
-               result
+               response
            })
        })
     }
@@ -90,10 +135,101 @@ module.exports.usersWithActivity = (req,res)=>{
                     err:err.sqlMessage
                 })
             }
+            let arr=[]
+            result.map(x=>{
+                let userDetail={
+                    user_id: x.USER_ID,
+                    first_name:x.FIRST_NAME,
+                    last_name:x.LAST_NAME,
+                    email:x.EMAIL,
+                    mobile_no:x.MOBILE_NO,
+                    date_of_registration:x.DATE_OF_REGISTRATION,
+                    user_status:x.USER_STATUS,
+                    gender:x.GENDER,
+                    house_no:x.HOUSE_NO,
+                    local_address:x.LOCAL_ADDRESS,
+                    district:x.DISTRICT,
+                    state:x.STATE,
+                    country:x.COUNTRY,
+                    pincode:x.PINCODE,
+                    created_at:x.CREATED_AT,
+                    hobbies:[],
+                    activities:[],
+                    }     
+            result.map(y=>{
+                if(userDetail.user_id===y.USER_ID){
+                    if(!userDetail.hobbies.includes(y.HOBBY)){
+                        userDetail.hobbies.push(y.HOBBY);
+                    }
+                    if(!userDetail.activities.includes(y.ACTIVITY)){
+                        userDetail.activities.push(y.ACTIVITY);
+                    }
+                    
+                }
+         })
+         arr.push(userDetail);  
+        
+    })
+        let response = Array.from(new Set(arr.map(a => a.user_id))).map(user_id => {
+                        return arr.find(a => a.user_id === user_id)
+            })
             return res.json({
                 message:"Success !",
-                result
+                response
             })
         })
 
+    }
+
+    module.exports.home = (req,res)=>{
+        const result = [
+            {
+              id: 1,
+              name: "shubham",
+              city: "xyz",
+            },
+            {
+              id: 1,
+              name: "shubham",
+              city: "abc",
+            },
+            {
+                id: 1,
+                name: "shubham",
+                city: "tuv",
+              },
+              {
+                id: 2,
+                name: "amit",
+                city: "qwe",
+              },
+              {
+                  id: 2,
+                  name: "amit",
+                  city: "xft",
+                },
+          ]; 
+          var arr=[]
+          result.map(x=>{
+              var ob={
+                  id:x.id,
+                  name:x.name,
+                  address:[]
+              }             
+             result.map(y=>{
+                  if(ob.id===y.id){
+                      ob.address.push(y.city);
+                  }
+              })           
+              arr.push(ob);
+          })
+        const response = Array.from(new Set(arr.map(a => a.id)))
+         .map(id => {
+           return arr.find(a => a.id === id)
+         })
+          return res.status(200).json({                    
+              message:"success",
+              status:res.statusCode === 200 ? 1 : 0,  
+              response
+          })
     }
