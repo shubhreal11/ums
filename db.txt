@@ -1,0 +1,180 @@
+
+create database ims;
+use ims;
+create table users (id int not null auto_increment , 
+                    first_name varchar(100) not null,
+                    last_name varchar(100) not null,
+                    email varchar(100) not null,
+                    mobile_no varchar(20) not null,
+                    date_of_registration date not null,
+                    user_status int not null,
+                    gender varchar(10) not null,
+                    primary key (id)                  
+                   );
+
+
+create table address (id int not null auto_increment , 
+                    user_id int ,
+                    house_no int not null,
+                    local_address varchar(100) not null,
+                    district varchar(100) not null,
+                    state varchar(100) not null,
+                    country varchar(100) not null,
+                    pincode int not null,
+                    created_at timestamp default  current_timestamp,
+                    primary key(id),
+                    foreign key(user_id) references users(id)
+                   );
+
+create table hobbies (id int not null auto_increment,
+                      user_id int ,
+                      hobby varchar(50),
+                      primary key(id),
+                      foreign key (user_id) references users(id)
+                     );
+
+
+
+   create table activities (id int not null auto_increment,
+                      user_id int ,
+                      activity varchar(500) not null,
+                      primary key(id),
+                      foreign key (user_id) references users(id)
+                     );
+
+insert into users ( first_name , last_name, email , mobile_no , date_of_registration , user_status , gender ) values 
+
+('SHUBHAM' , 'GUPTA' , 'SHUBHAMGUPTA@REAL11.COM' , '9559364730' , '2022-01-25' , 1 , 'MALE' ) ,
+('SHUBHANKR' , 'DUBEY' , 'SHUBHANKR@GMAIL.COM' , '9659364730' , '2021-01-25' , 0 , 'MALE' ),
+('ABHISHEK' , 'PANDEY' , 'A@GMAIL.COM' , '9859364730' , '2020-01-25' , 1 , 'MALE' ),
+('AKASH' , 'GUPTA' , 'AK@GMAIL.COM' , '9959364730' , '2020-01-25' , 1, 'MALE' ),
+('ADITI' , 'SINGH' , 'AS@GMAIL.COM' , '9580364730' , '2020-01-25' , 0 , 'FEMALE' ),
+('ANIKET' , 'SINGH' , 'AKS@GMAIL.COM' , '9999364730' , '2020-02-15' , 0 , 'MALE' ),
+('ABHIMANYU' , 'SINGH' , 'ABS@GMAIL.COM' , '9123454730' , '2021-04-27' , 1 , 'MALE' ),
+('ABHISHEK' , 'PANDEY' , 'A@GMAIL.COM' , '9859364730' , '2020-01-25' , 1, 'MALE' ),
+('SHUBH' , 'GUPTA' , 'SG@GMAIL.COM' , '9192929939' , '2021-09-25' , 1 , 'MALE' ),
+('ASISH' , 'SINGH' , 'ASS@GMAIL.COM' , '9859364736' , '2020-08-25' , 0 , 'MALE' ),
+('ALOK' , 'PATHAK' , 'ALP@GMAIL.COM' , '9858884730' , '2021-06-25' , 0, 'MALE' ),
+('AAYUSHI' , 'CHOUDHARY' , 'ASC@GMAIL.COM' , '9887364730' , '2022-01-25' , 1, 'FEMALE' ),
+('RANI' , 'PANDEY' , 'RAP@GMAIL.COM' , '9859908730' , '2020-01-25' , 0 , 'FEMALE' ),
+('AMIT' , 'SOLANKI' , 'AMS@GMAIL.COM' , '999999730' , '2020-01-12' , 1 , 'MALE' ),
+('DEEP' , 'PATEL' , 'DEEP@GMAIL.COM' , '9859234530' , '2020-07-25' , 0, 'MALE' ),
+('ADARSH' , 'CHAUDHARY' , 'ADARSH@GMAIL.COM' , '8888364730' , '2021-03-25' , 1, 'MALE' ),
+('SHASHWAT' , 'PANDEY' , 'SHASHWAT@GMAIL.COM' , '8759364730' , '2021-01-25' , 0 , 'MALE' ),
+('ABHISHEK' , 'CHAUHAN' , 'ABHI@GMAIL.COM' , '8887364730' , '2021-06-25' , 0 , 'MALE' ),
+('AVINASH' , 'CHANDRVANSI' , 'AVINASH@GMAIL.COM' , '7889364730' , '2022-01-15' , 0, 'MALE' ),
+('TANMAY' , 'JAIN' , 'TANMAY@GMAIL.COM' , '9455216678' , '2021-08-25' , 1 , 'MALE' )
+;
+
+insert into address (user_id , house_no ,local_address , district , state , country , pincode )
+values (1 , 54 , 'SHAHGANJ'  , 'JAUNPUR' , 'UP' , 'INDIA' , 223102),
+(2 , 55 , 'SARAI' , 'AZAMGARH' , 'UP' , 'INDIA' , 223103),
+(3 , 56 , 'ABC' , 'JAUPUR' , 'UP' , 'INDIA' , 223104),
+(4 , 57 , 'KARIMPUR' , 'SULTANPUR' , 'UP' , 'INDIA' , 223105),
+(5 , 58 , 'CHURAPUR' , 'AMETHI' , 'UP' , 'INDIA' , 223106),
+(6 , 59 , 'GAUSPUR' , 'JAUPUR' , 'UP' , 'INDIA' , 223107),
+(7 , 60 , 'BADAGAV' , 'JAUPUR' , 'UP' , 'INDIA' , 223108),
+(8 , 61 , 'CHAUBAHA' , 'AKABARPUR' , 'UP' , 'INDIA' , 223109),
+(9 , 62 , 'BADAGAV' , 'JAUPUR' , 'UP' , 'INDIA' , 223108),
+(10 , 63 , 'SHAHGANJ'  , 'JAUNPUR' , 'UP' , 'INDIA' , 223102),
+(11 , 64 , 'SARAI' , 'AZAMGARH' , 'UP' , 'INDIA' , 223103),
+(12 , 65 , 'ABC' , 'JAUPUR' , 'UP' , 'INDIA' , 223104),
+(13 , 66 , 'KARIMPUR' , 'SULTANPUR' , 'UP' , 'INDIA' , 223105),
+(14 , 67 , 'CHURAPUR' , 'AMETHI' , 'UP' , 'INDIA' , 223106),
+(15 , 68 , 'GAUSPUR' , 'JAUPUR' , 'UP' , 'INDIA' , 223107),
+(16 , 69 , 'BADAGAV' , 'JAUPUR' , 'UP' , 'INDIA' , 223108),
+(17 , 70 , 'CHAUBAHA' , 'AKABARPUR' , 'UP' , 'INDIA' , 223109),
+(18 , 71 , 'BADAGAV' , 'JAUPUR' , 'UP' , 'INDIA' , 223108),
+(19 , 72 , 'SHAHGANJ'  , 'JAUNPUR' , 'UP' , 'INDIA' , 223102),
+(20 , 73 , 'SARAI' , 'AZAMGARH' , 'UP', 'INDIA' , 223103),
+(1 , 74 , 'JAFARPUR' , 'AZAMGARH' , 'UP' , 'INDIA' , 262001),
+(1 , 75 , 'KARIMPUR' , 'SULTANPUR' , 'UP' , 'INDIA' , 223105),
+(2 , 76 , 'CHURAPUR' , 'AMETHI' , 'UP' , 'INDIA' , 223106),
+(2 , 77 , 'GAUSPUR' , 'JAUPUR' , 'UP' , 'INDIA' , 223107),
+(3 , 78 , 'SHAHGADH' , 'LUCKNOW' , 'UP' , 'INDIA' , 223108),
+(4 , 79 , 'CHAKRA' , 'AKABARPUR' , 'UP' , 'INDIA' , 223109),
+(5 , 80 , 'BADAGAV' , 'JAUPUR' , 'UP' , 'INDIA' , 223108)
+;
+
+
+insert into hobbies (user_id , hobby) values
+(1, 'Cricket' ),
+(1 , 'reading'),
+(1, 'Coding'),
+(2, 'football'),
+(2, 'singing'),
+(3, 'dancing'),
+(3 ,'coding' ),
+(4, 'Cricket' ),
+(4 , 'reading'),
+(5, 'Coding'),
+(5, 'football'),
+(6, 'singing'),
+(7, 'dancing'),
+(8 ,'coding' ),
+(9, 'Cricket' ),
+(9 , 'reading'),
+(9, 'Coding'),
+(10, 'football'),
+(10, 'singing'),
+(11, 'dancing'),
+(11 ,'coding' ),
+(12, 'Cricket' ),
+(12 , 'reading'),
+(12, 'Coding'),
+(13, 'football'),
+(13, 'singing'),
+(14, 'dancing'),
+(15,'coding' ),
+(16, 'football'),
+(16, 'singing'),
+(17, 'dancing'),
+(18 ,'coding' ),
+(19, 'Cricket' ),
+(19 , 'reading'),
+(20, 'Coding'),
+(20, 'football'),
+(20, 'singing')
+;
+
+insert into activities (user_id , activity) values
+(1, 'playing Cricket' ),
+(1 , 'reading novels'),
+(1, 'doing code'),
+(2, 'playing football'),
+(2, 'singing song'),
+(3, 'dancing'),
+(3 ,'doing coding' ),
+(4, 'playing Cricket' ),
+(4 , 'reading books'),
+(5, 'doing code'),
+(5, 'playing football'),
+(6, 'singing song '),
+(7, 'dancing'),
+(8 ,'doing code' ),
+(9, 'playing Cricket' ),
+(9 , 'reading novels'),
+(9, 'doing code'),
+(10, 'playing football'),
+(10, 'singing song'),
+(11, 'dancing'),
+(11 ,'doing code' ),
+(12, 'playing Cricket' ),
+(12 , 'reading stories'),
+(12, 'doing code'),
+(13, 'playing football'),
+(13, 'singing song'),
+(14, 'dancing'),
+(15,'doing code' ),
+(16, 'playing football'),
+(16, 'singing song'),
+(17, 'dancing'),
+(18 ,'doing code' ),
+(19, 'playing Cricket' ),
+(19 , 'reading novels'),
+(20, 'doing code'),
+(20, 'playing football'),
+(20, 'singing song')
+;
+
+
