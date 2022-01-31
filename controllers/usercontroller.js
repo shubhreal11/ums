@@ -30,7 +30,7 @@ module.exports.usersWithAddress = (req,res)=>{
             })
         }
         let arr=[]
-        result.map(x=>{
+        _.map(result , (x)=>{
             let userDetail={
                 basicDetail:{
                 user_id: x.user_id,
@@ -53,8 +53,8 @@ module.exports.usersWithAddress = (req,res)=>{
                 }
                
             };
-         arr.push(userDetail);   
-       })
+            arr.push(userDetail);  
+        })
             return res.status(200).json({
                 message:"success !",
                 arr
@@ -77,20 +77,21 @@ const sql = `SELECT USERS.USER_ID , USERS.FIRST_NAME , USERS.LAST_NAME , USERS.E
        _.map(result , (x)=>{
 
         let userDetail={
-            user_id: x.USER_ID,
-            first_name:x.FIRST_NAME,
-            last_name:x.LAST_NAME,
-            email:x.EMAIL,
-            mobile_no:x.MOBILE_NO,
-            date_of_registration:x.DATE_OF_REGISTRATION,
-            user_status:x.USER_STATUS,
-            gender:x.GENDER,
+            basicDetail:{
+                user_id: x.USER_ID,
+                first_name:x.FIRST_NAME,
+                last_name:x.LAST_NAME,
+                email:x.EMAIL,
+                mobile_no:x.MOBILE_NO,
+                date_of_registration:x.DATE_OF_REGISTRATION,
+                user_status:x.USER_STATUS,
+                gender:x.GENDER,
+            },
              hobbies:[]
            }   
-
         _.map(result , (y)=>{
 
-            if(userDetail.user_id===y.USER_ID){
+            if(userDetail.basicDetail.user_id===y.USER_ID){
                 if(!userDetail.hobbies.includes(y.HOBBY)){
                     userDetail.hobbies.push(y.HOBBY);
                 }
@@ -99,7 +100,7 @@ const sql = `SELECT USERS.USER_ID , USERS.FIRST_NAME , USERS.LAST_NAME , USERS.E
         arr.push(userDetail); 
        })
    let response = _.sortedUniqBy(arr ,(a)=>{
-       return a.user_id
+       return a.basicDetail.user_id
    })
        return res.json({
            message:"Success !",
@@ -124,26 +125,27 @@ module.exports.usersWithActivity = (req,res)=>{
            _.map(result , (x)=>{
 
             let userDetail={
-                user_id: x.USER_ID,
-                first_name:x.FIRST_NAME,
-                last_name:x.LAST_NAME,
-                email:x.EMAIL,
-                mobile_no:x.MOBILE_NO,
-                date_of_registration:x.DATE_OF_REGISTRATION,
-                user_status:x.USER_STATUS,
-                gender:x.GENDER,
-                activities:[]
-                }     
-
+                basicDetail:{
+                    user_id: x.USER_ID,
+                    first_name:x.FIRST_NAME,
+                    last_name:x.LAST_NAME,
+                    email:x.EMAIL,
+                    mobile_no:x.MOBILE_NO,
+                    date_of_registration:x.DATE_OF_REGISTRATION,
+                    user_status:x.USER_STATUS,
+                    gender:x.GENDER,
+                    } ,
+                    activities:[]
+                }
                  _.map(result , (y)=>{
-                    if(userDetail.user_id===y.USER_ID){
+                    if(userDetail.basicDetail.user_id===y.USER_ID){
                         userDetail.activities.push(y.ACTIVITY);
                    }
                  })
                  arr.push(userDetail);  
            })
            let response = _.sortedUniqBy(arr ,(a)=>{
-               return a.user_id
+               return a.basicDetail.user_id
             })
        
            return res.json({
@@ -169,26 +171,30 @@ module.exports.usersWithActivity = (req,res)=>{
             let arr=[];
             _.map(result , (x)=>{
                 let userDetail={
-                    user_id: x.USER_ID,
-                    first_name:x.FIRST_NAME,
-                    last_name:x.LAST_NAME,
-                    email:x.EMAIL,
-                    mobile_no:x.MOBILE_NO,
-                    date_of_registration:x.DATE_OF_REGISTRATION,
-                    user_status:x.USER_STATUS,
-                    gender:x.GENDER,
-                    house_no:x.HOUSE_NO,
-                    local_address:x.LOCAL_ADDRESS,
-                    district:x.DISTRICT,
-                    state:x.STATE,
-                    country:x.COUNTRY,
-                    pincode:x.PINCODE,
-                    created_at:x.CREATED_AT,
+                    basicDetail:{
+                        user_id: x.USER_ID,
+                        first_name:x.FIRST_NAME,
+                        last_name:x.LAST_NAME,
+                        email:x.EMAIL,
+                        mobile_no:x.MOBILE_NO,
+                        date_of_registration:x.DATE_OF_REGISTRATION,
+                        user_status:x.USER_STATUS,
+                        gender:x.GENDER,
+                    },
+                    address:{
+                        house_no:x.HOUSE_NO,
+                        local_address:x.LOCAL_ADDRESS,
+                        district:x.DISTRICT,
+                        state:x.STATE,
+                        country:x.COUNTRY,
+                        pincode:x.PINCODE,
+                        created_at:x.CREATED_AT,
+                    },
                     hobbies:[],
                     activities:[],
-                    }     
+                  }    
                     _.map(result , (y)=>{
-                        if(userDetail.user_id===y.USER_ID){
+                        if(userDetail.basicDetail.user_id===y.USER_ID){
                             if(!userDetail.hobbies.includes(y.HOBBY)){
                                 userDetail.hobbies.push(y.HOBBY);
                             }
@@ -200,16 +206,14 @@ module.exports.usersWithActivity = (req,res)=>{
                     })
                     arr.push(userDetail);  
             })
-  
            let response = _.sortedUniqBy(arr ,(a)=>{
-               return a.user_id
+               return a.basicDetail.user_id
            })
             return res.json({
                 message:"Success !",
                 response
             })
         })
-
     }
 
     module.exports.home = (req,res)=>{
