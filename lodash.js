@@ -404,10 +404,11 @@ let _ = require('lodash');
 // // post -> { id: "34abc", title: "The blog post we want", content: "..." }
 
 // const arr = [1,1,1,1,4,5,6,7,9,8];
-let objArr = [{id:1,name:'xyz'} , {id:1,name:'xyz'} , {id:1,name:'xyz'}]
+// let objArr = [{id:1,name:'xyz'} , {id:1,name:'xyz'} , {id:1,name:'xyz'}]
 
-// console.log(_.uniq(arr))
-const res = _.sortedUniqBy(objArr ,(a)=>{
-    return a.id
-})
-console.log(res)
+// // console.log(_.uniq(arr))
+// const res = _.sortedUniqBy(objArr ,(a)=>{
+//     return a.id
+// })
+// console.log(res)
+

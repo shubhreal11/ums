@@ -74,35 +74,36 @@ const sql = `SELECT USERS.USER_ID , USERS.FIRST_NAME , USERS.LAST_NAME , USERS.E
            })
        }
        let arr=[]
-       result.map(x=>{
-           let userDetail={
-                user_id: x.USER_ID,
-                first_name:x.FIRST_NAME,
-                last_name:x.LAST_NAME,
-                email:x.EMAIL,
-                mobile_no:x.MOBILE_NO,
-                date_of_registration:x.DATE_OF_REGISTRATION,
-                user_status:x.USER_STATUS,
-                gender:x.GENDER,
-                 hobbies:[]
-               }   
- 
-       result.map(y=>{
-          
-           if(userDetail.user_id===y.USER_ID){
-            if(!userDetail.hobbies.includes(y.HOBBY)){
-                userDetail.hobbies.push(y.HOBBY);
-            }
-           }
+       _.map(result , (x)=>{
+
+        let userDetail={
+            user_id: x.USER_ID,
+            first_name:x.FIRST_NAME,
+            last_name:x.LAST_NAME,
+            email:x.EMAIL,
+            mobile_no:x.MOBILE_NO,
+            date_of_registration:x.DATE_OF_REGISTRATION,
+            user_status:x.USER_STATUS,
+            gender:x.GENDER,
+             hobbies:[]
+           }   
+
+        _.map(result , (y)=>{
+
+            if(userDetail.user_id===y.USER_ID){
+                if(!userDetail.hobbies.includes(y.HOBBY)){
+                    userDetail.hobbies.push(y.HOBBY);
+                }
+               }
         })
-        arr.push(userDetail);   
-      })
-   let resp = _.sortedUniqBy(arr ,(a)=>{
+        arr.push(userDetail); 
+       })
+   let response = _.sortedUniqBy(arr ,(a)=>{
        return a.user_id
    })
        return res.json({
            message:"Success !",
-           resp
+           response
     
        })
    })
@@ -120,31 +121,31 @@ module.exports.usersWithActivity = (req,res)=>{
                })
            }
            let arr=[]
-            result.map(x=>{
-                let userDetail={
-                    user_id: x.USER_ID,
-                    first_name:x.FIRST_NAME,
-                    last_name:x.LAST_NAME,
-                    email:x.EMAIL,
-                    mobile_no:x.MOBILE_NO,
-                    date_of_registration:x.DATE_OF_REGISTRATION,
-                    user_status:x.USER_STATUS,
-                    gender:x.GENDER,
-                    activities:[]
-                    }     
-            result.map(y=>{
-                if(userDetail.user_id===y.USER_ID){
-                     userDetail.activities.push(y.ACTIVITY);
-                }
-         })
-         arr.push(userDetail);  
-        
-    })
-        let response = Array.from(new Set(arr.map(a => a.user_id))).map(user_id => {
-                        return arr.find(a => a.user_id === user_id)
-            })
-            console.log(response)
+           _.map(result , (x)=>{
 
+            let userDetail={
+                user_id: x.USER_ID,
+                first_name:x.FIRST_NAME,
+                last_name:x.LAST_NAME,
+                email:x.EMAIL,
+                mobile_no:x.MOBILE_NO,
+                date_of_registration:x.DATE_OF_REGISTRATION,
+                user_status:x.USER_STATUS,
+                gender:x.GENDER,
+                activities:[]
+                }     
+
+                 _.map(result , (y)=>{
+                    if(userDetail.user_id===y.USER_ID){
+                        userDetail.activities.push(y.ACTIVITY);
+                   }
+                 })
+                 arr.push(userDetail);  
+           })
+           let response = _.sortedUniqBy(arr ,(a)=>{
+               return a.user_id
+            })
+       
            return res.json({
                message:"Success !",
                response
@@ -165,8 +166,8 @@ module.exports.usersWithActivity = (req,res)=>{
                     err:err.sqlMessage
                 })
             }
-            let arr=[]
-            result.map(x=>{
+            let arr=[];
+            _.map(result , (x)=>{
                 let userDetail={
                     user_id: x.USER_ID,
                     first_name:x.FIRST_NAME,
@@ -186,23 +187,23 @@ module.exports.usersWithActivity = (req,res)=>{
                     hobbies:[],
                     activities:[],
                     }     
-            result.map(y=>{
-                if(userDetail.user_id===y.USER_ID){
-                    if(!userDetail.hobbies.includes(y.HOBBY)){
-                        userDetail.hobbies.push(y.HOBBY);
-                    }
-                    if(!userDetail.activities.includes(y.ACTIVITY)){
-                        userDetail.activities.push(y.ACTIVITY);
-                    }
-                    
-                }
-         })
-         arr.push(userDetail);  
-        
-    })
-        let response = Array.from(new Set(arr.map(a => a.user_id))).map(user_id => {
-                        return arr.find(a => a.user_id === user_id)
+                    _.map(result , (y)=>{
+                        if(userDetail.user_id===y.USER_ID){
+                            if(!userDetail.hobbies.includes(y.HOBBY)){
+                                userDetail.hobbies.push(y.HOBBY);
+                            }
+                            if(!userDetail.activities.includes(y.ACTIVITY)){
+                                userDetail.activities.push(y.ACTIVITY);
+                            }
+                            
+                        }
+                    })
+                    arr.push(userDetail);  
             })
+  
+           let response = _.sortedUniqBy(arr ,(a)=>{
+               return a.user_id
+           })
             return res.json({
                 message:"Success !",
                 response
