@@ -412,3 +412,197 @@ let _ = require('lodash');
 // })
 // console.log(res)
 
+// let posts = [
+
+//   { id: 1, title: "Dummy First blog post"},
+  
+//   { id:2, title: " DummySecond blog post"},
+  
+//   { id: 3, title: "Dunny third blog post" }
+  
+//   ];
+  
+//   posts = _.keyBy(posts, "id");
+  
+//   let post = posts[1]
+//   console.log(post)
+
+// let arr=[1,2,3];
+// console.log(_.drop(arr));
+// console.log(arr)
+
+// var array = [1, 2, 3, 4];
+// var res = _.find(array , (x)=>{
+//   return x%2==0;
+// })
+// console.log(res)
+// console.log(array)
+
+
+// var obj = {
+//   name:'shu',
+//   age:22,
+//   sta:1
+// }
+
+// var aarr = [1 , 10 ,3,4 ,5]
+// var str = 'shubham'
+// for(let i of str) {
+//   console.log(i)
+// }
+
+// let regex = /s*/; 
+//  let str = 'shubhamgfgfgf';
+//   let result = regex.test(str)
+//   console.log(result)
+
+
+// let regex = /harrsdfgy/;
+// // Lets look into some metacharacter symbols
+// regex = /^harrdc/; // ^ means expression will match if string starts with
+// regex = /harry$/; // $ at the end of the string means "string ends with"
+// regex = /h.rry/; //matches any one character
+// regex = /h*rry/; //matches any 0 or more characters
+// regex = /ha?rryi?t/; //? after character means that character is optional
+// regex = /h\*rry/
+
+// let str = "h*rry means codewith"; // 
+
+// let result = regex.exec(str);
+// console.log("The result from exec is ", result);
+
+// if(regex.test(str)){
+//     console.log(`The string ${str} matches the expression ${regex.source}`);
+// }
+// else{
+//     console.log(`The string ${str} does not match the expression ${regex.source}`);
+// }
+
+// let regex = /\war/;     //word character - _ or alphabet or numbers
+// regex = /\w+d1r/;       // \w+ means one or more word characters
+// regex = /\Wbhai/;       // Non word character
+// regex = /\W+bhai/;      // \W+ means more than one Non word character
+// regex = /number \d999/; // \d means digit
+// regex = /number \d+/;   // \d+ means more than one digit
+// regex = /\D999/;        // \D means non digit
+// regex = /\D+999/;       // \D+ means more than one non digit
+// regex = /\ska number/;  // Match whitespace character
+// regex = /\s+ka number/; // \s+ means match one or more than one whitespace characters
+// regex = /\Ska number/;  // Match non whitespace character
+// regex = /\S+ka number/; // Match one or more than one non whitespace character
+// regex = /4r5r\b/;  // word boundary
+
+// // Assertions
+// regex = /h(?=y)/;
+// regex = /h(?!y)/;
+// str = "harh7rd1r4r5ry%%$@bhai hdrryika number 899999harry9999";
+
+
+
+// let result = regex.exec(str);
+// console.log("The result from exec is ", result);
+
+// if(regex.test(str)){
+//     console.log(`The string ${str} matches the expression ${regex.source}`);
+// }
+// else{
+//     console.log(`The string ${str} does not match the expression ${regex.source}`);
+// }
+
+
+
+// console.log( _.map(['6', '8', '10'], _.ary(parseInt, 1)))
+
+// let res = _.after(3 , ()=>{
+//   console.log("Function called");
+// })
+// res();
+// res();
+// res();
+
+// let res = _.before(3 , ()=>{
+//   console.log("Function called");
+// })
+// res();
+// res();
+// res();
+
+// var obj ={ 
+//     Company: 'Real11', 
+//     Address: 'Noida', 
+//     Contact: '+91 96687787687' 
+//   }
+// var fun = function() { 
+//   return 'Company Name : ' + this.Company 
+//       + '\nAddress : ' + this.Address 
+//       + '\nContact : ' + this.Contact 
+// }; 
+
+// var func = _.bind(fun,obj ); 
+  
+// console.log(func());
+
+
+
+// var obj = {
+//   'author': 'Nidhi',
+//   'welcome': function(greet, mark) {
+//     return greet + ' ' + this.author + mark;
+//   }
+// };
+// var bound_fun = _.bindKey(obj, 'welcome', 'Hello' , 52);
+  
+// bound_fun();
+
+// var debounce_fun = _.debounce(function () {
+//   console.log('Function debounced after 1000ms!');
+//   }, 10000);
+  
+// debounce_fun();
+
+
+// Requiring lodash library
+// const _ = require('lodash');
+  
+// Using the _.delay() method
+// with its parameter
+// _.delay(function(content) {
+//     console.log(content);
+//   }, 3000, 'GeeksforGeeks!');
+  
+// Print the content after this line
+// console.log('Content:');
+
+// var object = { 'cpp': 5, 'java': 8 };
+  
+// // Use of _.memoize() method  
+// var values = _.memoize(_.values);
+  
+// // value of object 
+// console.log(values(object)); 
+  
+// // Modify the result cache.
+// values.cache.set(object, ['html', 'css']);
+// console.log(values(object));
+// console.log(object)
+
+// var hold = _.once(function(trap){
+//   console.log(trap + '!');
+// });
+ 
+// // Calling hold multiple times
+// hold('Logged in to the console');
+// hold('GfG');
+// hold('CS');
+
+
+// var users = (['q', 'r', 't', 'u']);
+  
+// // Using the _.flatMapDepth() method
+// let flat_map = _.flatMapDepth(users, duplicate, 2)
+// function duplicate(n) {
+//   return [[[n, n]]];
+// }
+  
+// // Printing the output 
+// console.log(flat_map);
