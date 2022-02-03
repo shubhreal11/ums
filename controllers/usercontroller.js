@@ -56,7 +56,8 @@ module.exports.usersWithAddress = (req, res) => {
                 }
 
             };
-            arr.push(userDetail);
+            arr = _.concat(arr , userDetail)
+            // arr.push(userDetail);
         })
         return res.status(200).json({
             message: "success !",
@@ -97,12 +98,16 @@ module.exports.usersWithHobby = (req, res) => {
             _.map(result, (y) => {
 
                 if (userDetail.basicDetail.user_id === y.USER_ID) {
-                    if (!userDetail.hobbies.includes(y.HOBBY)) {
-                        userDetail.hobbies.push(y.HOBBY);
+                    if(!_.includes(userDetail.hobbies , y.HOBBY)){
+                        userDetail.hobbies = _.concat(userDetail.hobbies , y.HOBBY)
                     }
+                    // if (!userDetail.hobbies.includes(y.HOBBY)) {
+                    //     userDetail.hobbies.push(y.HOBBY);
+                    // }
                 }
             })
-            arr.push(userDetail);
+            arr = _.concat(arr , userDetail)
+            // arr.push(userDetail);
         })
         let response = _.sortedUniqBy(arr, (a) => {
             return a.basicDetail.user_id
@@ -145,11 +150,18 @@ module.exports.usersWithActivity = (req, res) => {
                 activities: []
             }
             _.map(result, (y) => {
+               
                 if (userDetail.basicDetail.user_id === y.USER_ID) {
-                    userDetail.activities.push(y.ACTIVITY);
+
+                    if(!_.includes(userDetail.activities , y.ACTIVITY)){
+                        userDetail.activities = _.concat(userDetail.activities , y.ACTIVITY)
+                    }
+
+                    // userDetail.activities.push(y.ACTIVITY);
                 }
             })
-            arr.push(userDetail);
+            arr = _.concat(arr , userDetail)
+            // arr.push(userDetail);
         })
         let response = _.sortedUniqBy(arr, (a) => {
             return a.basicDetail.user_id
@@ -204,16 +216,23 @@ module.exports.getAllDetail = (req, res) => {
             }
             _.map(result, (y) => {
                 if (userDetail.basicDetail.user_id === y.USER_ID) {
-                    if (!userDetail.hobbies.includes(y.HOBBY)) {
-                        userDetail.hobbies.push(y.HOBBY);
+                    if(!_.includes(userDetail.hobbies , y.HOBBY)){
+                        userDetail.hobbies = _.concat(userDetail.hobbies , y.HOBBY)
                     }
-                    if (!userDetail.activities.includes(y.ACTIVITY)) {
-                        userDetail.activities.push(y.ACTIVITY);
+                    // if (!userDetail.hobbies.includes(y.HOBBY)) {
+                    //     userDetail.hobbies.push(y.HOBBY);
+                    // }
+                    if(!_.includes(userDetail.activities , y.ACTIVITY)){
+                        userDetail.activities = _.concat(userDetail.activities , y.ACTIVITY)
                     }
+                    // if (!userDetail.activities.includes(y.ACTIVITY)) {
+                    //     userDetail.activities.push(y.ACTIVITY);
+                    // }
 
                 }
             })
-            arr.push(userDetail);
+            arr = _.concat(arr , userDetail)
+            // arr.push(userDetail);
         })
         let response = _.sortedUniqBy(arr, (a) => {
             return a.basicDetail.user_id
